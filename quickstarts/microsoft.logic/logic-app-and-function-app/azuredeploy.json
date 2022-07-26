@@ -27,8 +27,8 @@
     }
   },
   "variables": {
-    "repoUrl": "https://github.com/AzureBytes/functionshttpecho.git",
-    "branch": "master",
+    "repoUrl": "https://github.com/bmoore-msft/function-app.git",
+    "branch": "main",
     "functionName": "Echo",
     "hostingPlanName": "[parameters('functionAppName')]",
     "storageAccountName": "[concat('azfunctions', uniquestring(resourceGroup().id))]",
@@ -91,7 +91,7 @@
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageAccountName')]",
-      "apiVersion": "2019-06-01",
+      "apiVersion": "2021-09-01",
       "location": "[parameters('location')]",
       "kind": "StorageV2",
       "sku": {
@@ -100,7 +100,7 @@
     },
     {
       "type": "Microsoft.Web/serverfarms",
-      "apiVersion": "2019-08-01",
+      "apiVersion": "2022-03-01",
       "name": "[variables('hostingPlanName')]",
       "location": "[parameters('location')]",
       "sku": {
@@ -113,7 +113,7 @@
       }
     },
     {
-      "apiVersion": "2019-08-01",
+      "apiVersion": "2022-03-01",
       "type": "Microsoft.Web/sites",
       "name": "[parameters('functionAppName')]",
       "location": "[parameters('location')]",
@@ -128,15 +128,15 @@
           "appSettings": [
             {
               "name": "AzureWebJobsDashboard",
-              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-06-01').keys[0].value)]"
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2021-09-01').keys[0].value)]"
             },
             {
               "name": "AzureWebJobsStorage",
-              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-06-01').keys[0].value)]"
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2021-09-01').keys[0].value)]"
             },
             {
               "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2019-06-01').keys[0].value)]"
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2021-09-01').keys[0].value)]"
             },
             {
               "name": "WEBSITE_CONTENTSHARE",
@@ -155,7 +155,7 @@
       },
       "resources": [
         {
-          "apiVersion": "2019-08-01",
+          "apiVersion": "2022-03-01",
           "name": "web",
           "type": "sourcecontrols",
           "dependsOn": [
@@ -164,7 +164,7 @@
           "properties": {
             "RepoUrl": "[variables('repoUrl')]",
             "branch": "[variables('branch')]",
-            "IsManualIntegration": true
+            "IsManualIntegration": false
           }
         }
       ]
