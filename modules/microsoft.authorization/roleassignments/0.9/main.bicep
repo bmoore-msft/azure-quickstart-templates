@@ -378,7 +378,7 @@ var roleNameLookup = {
   'WorkloadBuilder Migration Agent Role': 'd17ce0a2-0697-43bc-aac5-9113337ab61c'
 }
 
-resource identityRoleAssignDeployment 'Microsoft.Authorization/roleAssignments@2022-01-01-preview' = {
+resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-01-01-preview' = {
   name: roleAssignmentName
   properties: {
     roleDefinitionId: roleDefinitionId
@@ -389,4 +389,4 @@ resource identityRoleAssignDeployment 'Microsoft.Authorization/roleAssignments@2
 }
 
 // we are using a full reference to get the object as returned by the RP, and not the object requested
-output roleAssignment object = reference('Microsoft.Authorization/roleAssignments', roleAssignmentName, '2022-01-01')
+output roleAssignment object = reference(roleAssignment.id, '2022-01-01')
