@@ -379,6 +379,7 @@ var roleNameLookup = {
 }
 
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-01-01-preview' = {
+  //scope: resourceId('Microsoft.Storage/storageAccounts', 'foo')
   name: roleAssignmentName
   properties: {
     roleDefinitionId: roleDefinitionId
