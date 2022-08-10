@@ -105,7 +105,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = {
   }
 }
 
-resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = if(false) {
   name: virtualNetworkName
   location: location
   properties: {
@@ -117,7 +117,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
   }
 }
 
-resource subnet 'Microsoft.Network/virtualNetworks/subnets@2021-05-01' = {
+resource subnet 'Microsoft.Network/virtualNetworks/subnets@2021-05-01' = if(false) {
   parent: vnet
   name: subnetName
   properties: {
